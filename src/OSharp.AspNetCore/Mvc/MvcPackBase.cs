@@ -41,7 +41,7 @@ namespace OSharp.AspNetCore.Mvc
         {
             services = AddCors(services);
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
             services.AddControllersWithViews(options =>
             {
                 options.Conventions.Add(new DashedRoutingConvention());

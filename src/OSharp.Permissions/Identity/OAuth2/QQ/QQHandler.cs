@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0||NETCOREAPP3_1
 using System.Text.Json;
 #endif
 using System.Text.RegularExpressions;
@@ -40,7 +40,7 @@ namespace OSharp.Identity.OAuth2.QQ
             }
             JObject json = JObject.Parse(企鹅的返回不拘一格传入这里统一转换为JSON(await openIdResponse.Content.ReadAsStringAsync()));
             string openId = GetOpenId(json);
-
+            
             //获取用户信息
             Dictionary<string, string> parameters = new Dictionary<string, string>
             {
@@ -102,6 +102,7 @@ namespace OSharp.Identity.OAuth2.QQ
             };
 
             string endpoint = QueryHelpers.AddQueryString(Options.TokenEndpoint, parameters);
+
 
             HttpResponseMessage response = await Backchannel.GetAsync(endpoint, Context.RequestAborted);
             if (!response.IsSuccessStatusCode)

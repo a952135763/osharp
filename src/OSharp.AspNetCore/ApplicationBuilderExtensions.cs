@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Builder
             });
         }
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
 
         /// <summary>
         /// 添加Endpoint并Area路由支持

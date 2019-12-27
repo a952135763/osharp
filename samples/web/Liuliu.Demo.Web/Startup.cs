@@ -12,7 +12,7 @@ using Liuliu.Demo.Web.Startups;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
 using Microsoft.Extensions.Hosting;
 #endif
 using Microsoft.Extensions.Logging;
@@ -20,7 +20,9 @@ using Microsoft.Extensions.Logging;
 using OSharp.AspNetCore;
 using OSharp.Core.Builders;
 using OSharp.Entity;
-
+#if NETCOREAPP3_1
+using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
+#endif
 
 namespace Liuliu.Demo.Web
 {
@@ -29,11 +31,12 @@ namespace Liuliu.Demo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddOSharp<AspOsharpPackManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
 
 #else
@@ -41,6 +44,7 @@ namespace Liuliu.Demo.Web
 
 #endif
         {
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

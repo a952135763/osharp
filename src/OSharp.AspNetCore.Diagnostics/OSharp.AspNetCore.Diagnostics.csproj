@@ -4,7 +4,7 @@
   <Import Project="../../build/version.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <PackageId>OSharpNS.AspNetCore.Diagnostics</PackageId>
     <Summary>OSharp AspNetCore性能诊断组件</Summary>
     <Description>OSharp AspNetCore性能诊断组件，提供AspNetCore性能诊断功能的封装</Description>
@@ -39,6 +39,22 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+    <PackageReference Include="AspNetCore.HealthChecks.Hangfire" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.MySql" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Network" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Npgsql" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Oracle" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.SignalR" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqLite" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Network" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.System" Version="3.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
     <PackageReference Include="AspNetCore.HealthChecks.Hangfire" Version="3.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="3.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.MySql" Version="3.0.0" />

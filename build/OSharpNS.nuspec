@@ -8,9 +8,9 @@
     <owners>柳柳软件(66soft.net)</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
-    <projectUrl>https://github.com/i66soft/osharp</projectUrl>
+    <projectUrl>https://github.com/a952135763/osharp</projectUrl>
     <iconUrl>https://en.gravatar.com/userimage/140788132/0ff3b1e68fa0154337b1528c4276e276.png?size=80</iconUrl>
-    <description>OSharp Framework with .NETCoreApp3.1，此Package包含了OSharpNS的所有常用组件</description>
+    <description>OSharp Framework with .NETCoreApp3.1，此Package包含了OSharpNS的所有常用组件 </description>
     <copyright>Copyright @ 66SOFT 2014-2019</copyright>
     <tags>osharp osharpns</tags>
     <dependencies>

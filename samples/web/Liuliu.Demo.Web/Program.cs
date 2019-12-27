@@ -17,7 +17,7 @@ namespace Liuliu.Demo.Web
     public class Program
     {
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

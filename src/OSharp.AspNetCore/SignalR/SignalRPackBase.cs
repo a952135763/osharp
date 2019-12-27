@@ -62,7 +62,7 @@ namespace OSharp.AspNetCore.SignalR
         /// <returns></returns>
         protected virtual Action<ISignalRServerBuilder> GetSignalRServerBuildAction(IServiceCollection services)
         {
-#if NETCOREAPP3_0
+#if NETCOREAPP3_0 || NETCOREAPP3_1
             return builder => builder.AddNewtonsoftJsonProtocol(options =>
                 options.PayloadSerializerSettings.ContractResolver = new DefaultContractResolver());
 #else
