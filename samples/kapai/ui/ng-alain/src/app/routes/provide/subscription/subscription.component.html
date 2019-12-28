@@ -1,0 +1,85 @@
+<nz-spin [nzSpinning]="isSpinning" [nzTip]="tipStr">
+  <nz-card>
+    <div>
+      <sf #sf [schema]="schema" (formSubmit)="submit($event)" (formReset)="rest($event)" mode="search" [button]="null">
+        <button type="submit" nz-button [disabled]="submitdisabled">
+          <i nz-icon nzType="dollar" theme="outline"></i>开始
+        </button>
+        <button (click)="rest($event)" type="button" nz-button [disabled]="resetdisabled">
+          <i nz-icon nzType="coffee" nzTheme="outline"></i>停止
+        </button>
+      </sf>
+    </div>
+    <nz-spin [nzSpinning]="itemloading" [nzTip]="itemtipStr">
+      <nz-empty [style.display]="isSpecial ? '' : 'none'"></nz-empty>
+      <div [style.display]="isSpecial ? 'none' : ''" sg-container="4">
+        <kendo-sortable
+          #sortable
+          zone="default"
+          [navigatable]="false"
+          [animation]="false"
+          [kendoSortableBinding]="items"
+          (dataAdd)="onDataAdd($event)"
+          (dataRemove)="onDataRemove($event)"
+          (dataMove)="onDataMove($event)"
+          (dragEnd)="onDragEnd($event)"
+          (dragOver)="onDragOver($event)"
+          (dragStart)="onDragStart($event)"
+          (navigate)="onNavigate($event)"
+        >
+          <ng-template let-test="item" let-i="index">
+            <sg
+              ><!-- 按钮 A标签需要设置 draggable为true -->
+              <nz-card nzTitle="{{ test.orderid }}" nzBordered="true" nzHoverable="true" [nzActions]="[actionOk]">
+                <p>金额:{{ test.amount/100 | number:'0.2' }}</p>
+                <p>创建时间:{{ test.createdTime | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+                <ng-template #actionOk>
+                  <button
+                    nzTooltipTitle="复制单号"
+                    nzTooltipPlacement="left"
+                    nz-tooltip
+                    nz-button
+                    ngxClipboard
+                    [cbContent]="test.orderid"
+                    (cbOnSuccess)="cbsuccess(test.orderid)"
+                    nzShape="circle"
+                  >
+                    <i nz-icon nzType="copy" nzTheme="outline"></i>
+                  </button>
+
+                  <button
+                    nzTooltipTitle="抢此单"
+                    nzTooltipPlacement="right"
+                    nz-tooltip
+                    nz-button
+                    (click)="gorder(test)"
+                    nzType="primary"
+                    nzShape="circle"
+                  >
+                    <i nz-icon nzType="check" nzTheme="outline"></i>
+                  </button>
+                </ng-template>
+              </nz-card>
+            </sg>
+          </ng-template>
+        </kendo-sortable>
+      </div>
+    </nz-spin>
+  </nz-card>
+</nz-spin>
+
+<nz-modal #modal [(nzVisible)]="modalshow" [nzTitle]="ordertip" [nzClosable]="false" [nzFooter]="null">
+  <nz-result nzStatus="success">
+    <div nz-result-title>
+        <b>提示:请一定要确认对应金额到账后再在本页面确认(钱已到账)</b>
+    </div>
+      <div nz-result-content>
+          <p>收款号信息->{{orderComplete.article}}</p>
+          <p>订单时间->{{ orderComplete.createdTime | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+          <p>订单金额->{{ orderComplete.amount / 100 | number:'0.2' }}</p>
+      </div>
+    </nz-result>
+  <div class="modal-footer">
+    <button nz-button type="submit" [nzType]="'primary'" (click)="ordercomplete(orderComplete)">钱已到账</button>
+  </div>
+</nz-modal>

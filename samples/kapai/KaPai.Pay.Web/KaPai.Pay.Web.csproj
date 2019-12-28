@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="../../../build/public.props" />
+  <Import Project="../../../build/version.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright @ Kapai 2014-2020</Copyright>
+    <Version>3.0.1</Version>
+    <Authors>KaPai</Authors>
+    <Company />
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <UserSecretsId>5c347d17-39dd-4b6f-9ac3-cd728026d26c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191030093053_init.cs" />
+    <Compile Remove="Migrations\20191030093053_init.Designer.cs" />
+    <Compile Remove="Migrations\20191030112016_init.cs" />
+    <Compile Remove="Migrations\20191030112016_init.Designer.cs" />
+    <Compile Remove="Migrations\20191102091925_init.cs" />
+    <Compile Remove="Migrations\20191102091925_init.Designer.cs" />
+    <Compile Remove="Startups\MySqlDefaultDbContextMigrationPack.cs" />
+    <Compile Remove="Startups\MySqlDesignTimeDefaultDbContextFactory.cs" />
+    <Compile Remove="Startups\OracleDefaultDbContextMigrationPack.cs" />
+    <Compile Remove="Startups\OracleDesignTimeDefaultDbContextFactory.cs" />
+    <Compile Remove="Startups\SqliteDefaultDbContextMigrationPack.cs" />
+    <Compile Remove="Startups\SqliteDesignTimeDefaultDbContextFactory.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.Pro" Version="2.2.1" />
+    <PackageReference Include="Hangfire.Pro.Redis" Version="2.5.3" />
+    <PackageReference Include="IP2Region" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+
+
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\OSharp.AspNetCore.Diagnostics\OSharp.AspNetCore.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.AspNetCore\OSharp.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.AutoMapper\OSharp.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.CodeGeneration\OSharp.CodeGeneration.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.EntityFrameworkCore.PostgreSql\OSharp.EntityFrameworkCore.PostgreSql.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.Log4Net\OSharp.Log4Net.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.MiniProfiler\OSharp.MiniProfiler.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.Redis\OSharp.Redis.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.Swagger\OSharp.Swagger.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.Hangfire\OSharp.Hangfire.csproj" />
+
+    <ProjectReference Include="..\KaPai.Pay.Core\KaPai.Pay.Core.csproj" />
+    <ProjectReference Include="..\KaPai.Pay.EntityConfiguration\KaPai.Pay.EntityConfiguration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="log\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ip2region.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

@@ -16,7 +16,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using OSharp.Exceptions;
-
+#if NETSTANDARD2_1
+using Z.EntityFramework.Extensions;
+#endif
 using Z.EntityFramework.Plus;
 
 

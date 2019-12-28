@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../../build/public.props" />
+  <Import Project="../../../build/version.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <RootNamespace>KaPai.Pay</RootNamespace>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Authentication.GitHub.Core" Version="1.0.0" />
+    <PackageReference Include="Hangfire" Version="1.7.8" />
+    <PackageReference Include="Hangfire.Pro" Version="2.2.1" />
+    <PackageReference Include="IP2Region" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+
+
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="[2.2.0, 3.0]" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\OSharp.AutoMapper\OSharp.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.Permissions\OSharp.Permissions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Identity/IdentityService.*.cs">
+      <DependentUpon>IdentityService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Infos/InfosService.*.cs">
+      <DependentUpon>InfosService.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Infos/InfosService.*.generated.cs">
+      <DependentUpon>InfosService.generated.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Infos/InfosServiceBase.*.generated.cs">
+      <DependentUpon>InfosServiceBase.generated.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

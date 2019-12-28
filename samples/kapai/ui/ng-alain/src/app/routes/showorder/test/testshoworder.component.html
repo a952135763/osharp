@@ -1,0 +1,38 @@
+<div nz-row>
+  <div nz-col nzSpan="24">
+    <nz-spin [nzSize]="'large'" [nzTip]="tipstr" [nzSpinning]="loading">
+      <nz-layout style="text-align:center;">
+        <nz-header>
+          <span style="font-size: 24px;">
+            请使用支付宝扫码支付
+          </span>
+        </nz-header>
+        <nz-content>
+          <div nz-row>
+            <div nz-col nzSpan="24">
+              <div *ngIf="!loading; else noqr" [style.text-align]="'center'">
+                <qr [value]="qrurl" [level]="'H'" [size]="'230'"></qr>
+                <div nz-row>
+                  <span
+                  >请扫码支付:
+                  <div style="color: red;font-size: 20px;">
+                    {{ money | number: '0.2' }}
+                  </div>
+                  金额不准确将无法到账!</span>
+                </div>
+              </div>
+              <ng-template #noqr>
+                <div [style.text-align]="'center'">
+                  无法显示二维码
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </nz-content>
+        <nz-footer [style.text-align]="'center'">
+              <count-down #cd [target]="target" (event)="handleEvent($event)" style="font-size: 20px;"></count-down>
+        </nz-footer>
+      </nz-layout>
+    </nz-spin>
+  </div>
+</div>

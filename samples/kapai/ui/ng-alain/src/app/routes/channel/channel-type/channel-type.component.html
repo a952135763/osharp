@@ -1,0 +1,34 @@
+<!--<once-generated>这个文件只生成一次，再次生成不会被覆盖。</once-generated>-->
+<!--<last-editor>KaPai</last-editor>-->
+<nz-card>
+  <div>
+    <button nz-button (click)="st.reload()"><i nz-icon nzType="reload" nzTheme="outline"></i>刷新</button>
+    <button nz-button (click)="opennewmodel()" acl="Root.Admin.Channel.ChannelType.Create">
+      <i nz-icon type="plus-circle" theme="outline"></i>新增
+    </button>
+    <osharp-ad-search [request]="request" [columns]="columns" (submited)="search($event)"></osharp-ad-search>
+  </div>
+  <st
+    #st
+    [data]="readUrl"
+    [columns]="columns"
+    [req]="req"
+    [res]="res"
+    [(pi)]="request.PageCondition.PageIndex"
+    [(ps)]="request.PageCondition.PageSize"
+    [page]="page"
+    size="small"
+    [scroll]="{ x: '1200px' }"
+    multiSort
+    (change)="change($event)"
+    (error)="error($event)"
+  >
+    <ng-template st-row="ChannelJson" let-item let-index="index">
+      <a nz-button (click)="ChannelJsonShow(item)" >点击查看</a>
+    </ng-template>
+  </st>
+</nz-card>
+
+
+<osharp-ad-channeltype #channeltype [createUrl]="readUrl" [updateUrl]="updateUrl" (Success)="success()">
+</osharp-ad-channeltype>

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../../build/public.props" />
+  <Import Project="../../../build/version.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\OSharp.EntityFrameworkCore\OSharp.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\..\src\OSharp.Permissions\OSharp.Permissions.csproj" />
+
+    <ProjectReference Include="..\KaPai.Pay.Core\KaPai.Pay.Core.csproj" />
+  </ItemGroup>
+
+</Project>

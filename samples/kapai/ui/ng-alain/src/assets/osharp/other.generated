@@ -1,0 +1,140 @@
+
+/*
+各模块路由：
+{ path: 'channel', loadChildren: () => import('./channel/channel.module').then(m => m.ChannelModule), canActivateChild: [ACLGuard], data: { guard: 'Root.Admin.Channel' } },
+{ path: 'provide', loadChildren: () => import('./provide/provide.module').then(m => m.ProvideModule), canActivateChild: [ACLGuard], data: { guard: 'Root.Admin.Provide' } },
+{ path: 'merchant', loadChildren: () => import('./merchant/merchant.module').then(m => m.MerchantModule), canActivateChild: [ACLGuard], data: { guard: 'Root.Admin.Merchant' } },
+{ path: 'cash-money', loadChildren: () => import('./cash-money/cash-money.module').then(m => m.CashMoneyModule), canActivateChild: [ACLGuard], data: { guard: 'Root.Admin.CashMoney' } },
+
+各模块组件路由：
+通道 模块组件路由数据
+{ path: 'channels', component: ChannelsComponent, canActivate: [ACLGuard], data: { title: '通道列表管理', reuse: true, guard: 'Root.Admin.Channel.Channels.Read' } },
+{ path: 'percentage', component: PercentageComponent, canActivate: [ACLGuard], data: { title: '费率列表管理', reuse: true, guard: 'Root.Admin.Channel.Percentage.Read' } },
+{ path: 'user-channel', component: UserChannelComponent, canActivate: [ACLGuard], data: { title: '用户开启通道管理', reuse: true, guard: 'Root.Admin.Channel.UserChannel.Read' } },
+{ path: 'channel-type', component: ChannelTypeComponent, canActivate: [ACLGuard], data: { title: '通道供应商账号类型管理', reuse: true, guard: 'Root.Admin.Channel.ChannelType.Read' } },
+
+
+供应商 模块组件路由数据
+{ path: 'article-assort', component: ArticleAssortComponent, canActivate: [ACLGuard], data: { title: '收款分类列表管理', reuse: true, guard: 'Root.Admin.Provide.ArticleAssort.Read' } },
+{ path: 'article-entities', component: ArticleEntitiesComponent, canActivate: [ACLGuard], data: { title: '收款号列表管理', reuse: true, guard: 'Root.Admin.Provide.ArticleEntities.Read' } },
+{ path: 'points', component: PointsComponent, canActivate: [ACLGuard], data: { title: '供应商实时积分管理', reuse: true, guard: 'Root.Admin.Provide.Points.Read' } },
+{ path: 'points-log', component: PointsLogComponent, canActivate: [ACLGuard], data: { title: '积分变动记录管理', reuse: true, guard: 'Root.Admin.Provide.PointsLog.Read' } },
+{ path: 'provide-extra', component: ProvideExtraComponent, canActivate: [ACLGuard], data: { title: '供应商参数管理', reuse: true, guard: 'Root.Admin.Provide.ProvideExtra.Read' } },
+
+
+商户 模块组件路由数据
+{ path: 'orders', component: OrdersComponent, canActivate: [ACLGuard], data: { title: '商户订单列表管理', reuse: true, guard: 'Root.Admin.Merchant.Orders.Read' } },
+{ path: 'amounts', component: AmountsComponent, canActivate: [ACLGuard], data: { title: '商户实时余额管理', reuse: true, guard: 'Root.Admin.Merchant.Amounts.Read' } },
+{ path: 'amounts-log', component: AmountsLogComponent, canActivate: [ACLGuard], data: { title: '余额变动记录管理', reuse: true, guard: 'Root.Admin.Merchant.AmountsLog.Read' } },
+{ path: 'merchant-extra', component: MerchantExtraComponent, canActivate: [ACLGuard], data: { title: '商户参数管理', reuse: true, guard: 'Root.Admin.Merchant.MerchantExtra.Read' } },
+{ path: 'order-back-log', component: OrderBackLogComponent, canActivate: [ACLGuard], data: { title: '订单回调记录管理', reuse: true, guard: 'Root.Admin.Merchant.OrderBackLog.Read' } },
+
+
+提现模块 模块组件路由数据
+{ path: 'bank-list', component: BankListComponent, canActivate: [ACLGuard], data: { title: '收款账号管理', reuse: true, guard: 'Root.Admin.CashMoney.BankList.Read' } },
+{ path: 'cash-log', component: CashLogComponent, canActivate: [ACLGuard], data: { title: '提现记录管理', reuse: true, guard: 'Root.Admin.CashMoney.CashLog.Read' } },
+
+
+
+各模块菜单数据：
+通道 模块菜单数据
+{
+  "text": "通道模块",
+  "group": "true",
+  "icon": "anticon-border",
+  "acl": "Root.Admin.Channel",
+  "children": [{
+    "text": "通道列表管理",
+    "link": "/channel/channels",
+    "acl": "Root.Admin.Channel.Channels"
+  }, {
+    "text": "费率列表管理",
+    "link": "/channel/percentage",
+    "acl": "Root.Admin.Channel.Percentage"
+  }, {
+    "text": "用户开启通道管理",
+    "link": "/channel/user-channel",
+    "acl": "Root.Admin.Channel.UserChannel"
+  }, {
+    "text": "通道供应商账号类型管理",
+    "link": "/channel/channel-type",
+    "acl": "Root.Admin.Channel.ChannelType"
+  }]
+}
+
+供应商 模块菜单数据
+{
+  "text": "供应商模块",
+  "group": "true",
+  "icon": "anticon-border",
+  "acl": "Root.Admin.Provide",
+  "children": [{
+    "text": "收款分类列表管理",
+    "link": "/provide/article-assort",
+    "acl": "Root.Admin.Provide.ArticleAssort"
+  }, {
+    "text": "收款号列表管理",
+    "link": "/provide/article-entities",
+    "acl": "Root.Admin.Provide.ArticleEntities"
+  }, {
+    "text": "供应商实时积分管理",
+    "link": "/provide/points",
+    "acl": "Root.Admin.Provide.Points"
+  }, {
+    "text": "积分变动记录管理",
+    "link": "/provide/points-log",
+    "acl": "Root.Admin.Provide.PointsLog"
+  }, {
+    "text": "供应商参数管理",
+    "link": "/provide/provide-extra",
+    "acl": "Root.Admin.Provide.ProvideExtra"
+  }]
+}
+
+商户 模块菜单数据
+{
+  "text": "商户模块",
+  "group": "true",
+  "icon": "anticon-border",
+  "acl": "Root.Admin.Merchant",
+  "children": [{
+    "text": "商户订单列表管理",
+    "link": "/merchant/orders",
+    "acl": "Root.Admin.Merchant.Orders"
+  }, {
+    "text": "商户实时余额管理",
+    "link": "/merchant/amounts",
+    "acl": "Root.Admin.Merchant.Amounts"
+  }, {
+    "text": "余额变动记录管理",
+    "link": "/merchant/amounts-log",
+    "acl": "Root.Admin.Merchant.AmountsLog"
+  }, {
+    "text": "商户参数管理",
+    "link": "/merchant/merchant-extra",
+    "acl": "Root.Admin.Merchant.MerchantExtra"
+  }, {
+    "text": "订单回调记录管理",
+    "link": "/merchant/order-back-log",
+    "acl": "Root.Admin.Merchant.OrderBackLog"
+  }]
+}
+
+提现模块 模块菜单数据
+{
+  "text": "提现模块模块",
+  "group": "true",
+  "icon": "anticon-border",
+  "acl": "Root.Admin.CashMoney",
+  "children": [{
+    "text": "收款账号管理",
+    "link": "/cash-money/bank-list",
+    "acl": "Root.Admin.CashMoney.BankList"
+  }, {
+    "text": "提现记录管理",
+    "link": "/cash-money/cash-log",
+    "acl": "Root.Admin.CashMoney.CashLog"
+  }]
+}
+
+*/

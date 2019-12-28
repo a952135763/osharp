@@ -1,0 +1,45 @@
+
+<!--<once-generated>这个文件只生成一次，再次生成不会被覆盖。</once-generated>-->
+<!--<last-editor>KaPai</last-editor>-->
+<nz-card>
+  <div>
+    <button nz-button (click)="st.reload()"><i nz-icon nzType="reload" nzTheme="outline"></i>刷新</button>
+    <osharp-ad-search [request]="request" [columns]="columns" (submited)="search($event)"></osharp-ad-search>
+  </div>
+  <st #st  [data]="readUrl" [columns]="columns" [req]="req" [res]="res" [(pi)]="request.PageCondition.PageIndex" [(ps)]="request.PageCondition.PageSize" [page]="page" size="middle"
+  [scroll]="{x:'1200px'}" multiSort (change)="change($event)" (error)="error($event)">
+    <ng-template st-row="articleassort" let-item let-index="index">
+        <nz-tag [nzColor]="item.ArticleAssortId?'green':'geekblue'">{{item.ArticleAssortId ? item.ArticleAssortId:'未分配'}}</nz-tag>
+    </ng-template>
+    <ng-template st-row="channel" let-item let-index="index">
+        <nz-tag [nzColor]="'cyan'">{{item.Channel_Name}}</nz-tag>
+    </ng-template>
+    <ng-template st-row="orderid" let-item let-index="index">
+        <nz-tag> {{item.Orderid}}</nz-tag>
+    </ng-template>
+    <ng-template st-row="createdamount" let-item let-index="index">
+        <nz-tag [nzColor]="'orange'">{{item.CreatedAmount / 100 | currency:"$"}}</nz-tag>
+    </ng-template>
+    <ng-template st-row="payamount" let-item let-index="index">
+        <nz-tag [nzColor]="'orange'">{{item.PayAmount / 100 | currency:"$"}}</nz-tag>
+    </ng-template>
+    <ng-template st-row="remark" let-item let-index="index">
+        <nz-tag [nzColor]="'orange'">{{item.Remark ? item.Remark:'无'}}</nz-tag>
+    </ng-template>
+    <ng-template st-row="AsynUrl" let-item>
+      {{item.AsynUrl}}
+    </ng-template>
+    <ng-template st-row="userid" let-item>
+      <nz-tag [nzColor]="'#87d068'">{{item.UserId}}</nz-tag>
+    </ng-template>
+  </st>
+</nz-card>
+
+<nz-modal #modal [nzVisible]="false" [nzTitle]="editTitle" [nzClosable]="false" [nzFooter]="null">
+  <sf #sf mode="edit" [schema]="schema" [ui]="ui" [formData]="editRow" button="none">
+    <div class="modal-footer">
+      <button nz-button type="button" (click)="close()">关闭</button>
+      <button nz-button type="submit" [nzType]="'primary'" (click)="save(sf.value)" [disabled]="!sf.valid" [nzLoading]="http.loading" [acl]="'Root.Admin.Merchant.Orders.Update'">保存</button>
+    </div>
+  </sf>
+</nz-modal>

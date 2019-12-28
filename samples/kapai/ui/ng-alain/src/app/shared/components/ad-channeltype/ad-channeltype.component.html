@@ -1,0 +1,96 @@
+<nz-modal
+  #newmodal
+  [(nzVisible)]="visible"
+  [nzTitle]="title"
+  [nzClosable]="false"
+  [nzContent]="content"
+  [nzFooter]="footer"
+  [nzBodyStyle]="{ 'max-height': '600px', 'overflow-y': 'auto' }"
+>
+  <ng-template #footer>
+    <button nz-button type="button" (click)="closenewmodel()">关闭</button>
+    <button nz-button type="button" (click)="resetnewmodel()">重置</button>
+    <button [nzLoading]="http.loading" nz-button type="submit" [nzType]="'primary'" (click)="submitnewmodel()">
+      确认
+    </button>
+  </ng-template>
+
+  <ng-template #content>
+    <div class="nz-row">
+      <nz-select [(ngModel)]="channel" (nzOpenChange)="GetChannel(false)" style="width: 200px;">
+        <nz-option *ngFor="let item of channels" [nzValue]="item.Id" [nzLabel]="item.Name"></nz-option>
+      </nz-select>
+    </div>
+    <ng-container
+      *ngTemplateOutlet="channeltypeTpl; context: { $implicit: channeltype, parentobj: null }"
+    ></ng-container>
+
+    <ng-template #channeltypeTpl let-channeltype let-parentobj="parentobj">
+      <div class="node-box" *ngIf="channeltype">
+        <ng-container *ngFor="let node of channeltype.Node; let i = index">
+          <ng-container
+            *ngTemplateOutlet="nodeTpl; context: { $implicit: node, index: i, parentobj: channeltype }"
+          ></ng-container>
+        </ng-container>
+        <button nz-button nzSize="small" (click)="addNode(channeltype)">增加参数</button>
+      </div>
+    </ng-template>
+
+    <ng-template #nodeTpl let-node let-parentobj="parentobj" let-index="index">
+      <nz-input-group nzCompact>
+        <nz-select [(ngModel)]="node.ValueType" style="width: 20%;">
+          <nz-option
+            *ngFor="let column of channeltypeEntries"
+            [nzValue]="column.ValueType"
+            [nzLabel]="column.Display"
+          ></nz-option>
+        </nz-select>
+        <input nz-input [(ngModel)]="node.Field" style="width: 29%;" />
+        <div style="width: 45%;">
+          <ng-container [ngSwitch]="node.ValueType">
+            <ng-container *ngSwitchCase="'1'">
+              <input nz-input [(ngModel)]="node.Value" style="width: 95%;"/>
+            </ng-container>
+            <ng-container *ngSwitchCase="'2'">
+              <nz-input-number [(ngModel)]="node.Value" style="width: 95%;"></nz-input-number>
+            </ng-container>
+            <ng-container *ngSwitchCase="'3'">
+              <nz-switch
+                [(ngModel)]="node.Value"
+                [nzCheckedChildren]="checkedTemplate"
+                [nzUnCheckedChildren]="unCheckedTemplate"
+                style="padding:2px 2px 2px 8px;"
+              >
+                <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+                <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template>
+              </nz-switch>
+            </ng-container>
+            <ng-container *ngSwitchCase="'4'">
+              <input nz-input [(ngModel)]="node.Value" [disabled]="true" [placeholder]="'选填参数'" style="width: 95%;"/>
+            </ng-container>
+            <ng-container *ngSwitchCase="'8'">
+                <nz-select [(ngModel)]="node.Value" [nzPlaceHolder]="'选择区域'" style="width: 95%;">
+                    <nz-option
+                    *ngFor="let column of region"
+                    [nzValue]="column.Id"
+                    [nzLabel]="column.Name"
+                  ></nz-option>
+                </nz-select>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div style="width: 6%;">
+          <button
+            nz-button
+            (click)="removeNode(index, node, parentobj)"
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip="删除参数"
+          >
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </button>
+        </div>
+      </nz-input-group>
+    </ng-template>
+  </ng-template>
+</nz-modal>
